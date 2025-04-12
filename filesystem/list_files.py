@@ -15,6 +15,7 @@ class ListFiles:
                 "recursive": ("BOOLEAN", {"default": False}),
                 "sort_by": (s.SORT_BY_OPTIONS, {"default": "name"}),
                 "sort_order": (s.SORT_ORDER_OPTIONS, {"default": "asc"}),
+                "separator": ("STRING", {"default": ","}),
             }
         }
     
@@ -23,7 +24,7 @@ class ListFiles:
     FUNCTION = "list_files"
     CATEGORY = "filesystem"
 
-    def list_files(self, directory, file_types, recursive, sort_by, sort_order):
+    def list_files(self, directory, file_types, recursive, sort_by, sort_order, separator):
         if not directory:
             directory = folder_paths.get_input_directory()
         
@@ -51,4 +52,4 @@ class ListFiles:
         elif sort_by == "modified_time":
             files.sort(key=lambda x: os.path.getmtime(x), reverse=reverse)
         
-        return ("\n".join(files),) 
+        return (separator.join(files),) 
