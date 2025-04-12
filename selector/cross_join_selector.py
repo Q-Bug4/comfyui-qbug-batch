@@ -6,20 +6,20 @@ class CrossJoinSelector:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "input_1": ("STRING", {"multiline": True}),
-                "separator": ("STRING", {"default": "\n"}),
+                "separator": ("STRING", {"default": ","}),
                 "reset": ("BOOLEAN", {"default": False}),
+                "input_1": ("STRING", {"forceInput": True}),
             },
             "optional": {
-                "input_2": ("STRING", {"multiline": True}),
-                "input_3": ("STRING", {"multiline": True}),
-                "input_4": ("STRING", {"multiline": True}),
-                "input_5": ("STRING", {"multiline": True}),
+                "input_2": ("STRING", {"forceInput": True}),
+                "input_3": ("STRING", {"forceInput": True}),
+                "input_4": ("STRING", {"forceInput": True}),
+                "input_5": ("STRING", {"forceInput": True}),
             }
         }
     
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", "STRING")
-    RETURN_NAMES = ("output_1", "output_2", "output_3", "output_4", "output_5", "next_input")
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING")
+    RETURN_NAMES = ("output_1", "output_2", "output_3", "output_4", "output_5")
     FUNCTION = "cross_join"
     CATEGORY = "selector"
 
@@ -49,7 +49,7 @@ class CrossJoinSelector:
         
         # 如果没有输入，返回空结果
         if not inputs:
-            return "", "", "", "", "", None
+            return "", "", "", "", ""
             
         # 为当前输入组合生成唯一的键
         state_key = self.get_state_key(inputs)
@@ -92,11 +92,4 @@ class CrossJoinSelector:
         # 保存更新后的状态
         state["indices"] = indices
         
-        # 检查是否需要添加新的输入
-        # 当所有索引都为0时，说明完成了一轮完整的循环
-        next_input = ""
-        if all(idx == 0 for idx in indices) and len(inputs) < 5:
-            next_input = None
-        
-        print(f"状态键: {state_key}, 当前索引: {indices}, 输出: {outputs}, 下一个输入: {next_input}")
-        return tuple(outputs + [next_input]) 
+        return tuple(outputs) 
