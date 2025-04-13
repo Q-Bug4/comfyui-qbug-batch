@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-qbug-batch"
+description = "ComfyUI Batch Toolkit: Custom nodes that simplify batch operations and improve efficiency. ComfyUI批处理工具集：简化批处理操作，提高效率的自定义节点。"
+version = "0.1.0"
+license = {file = "LICENSE"}
+
+[project.urls]
+Repository = "https://github.com/Q-Bug4/comfyui-qbug-batch"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = "qbug"
+DisplayName = "comfyui-qbug-batch"
+Icon = ""
