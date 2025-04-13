@@ -203,5 +203,4 @@ class CrossJoinSelector:
         state["indices"] = indices
         state["counts"] = counts
         
-        print(f"状态键: {state_key}, 当前索引: {indices}, 计数: {counts}, 输出: {outputs}")
         return tuple(outputs) 
